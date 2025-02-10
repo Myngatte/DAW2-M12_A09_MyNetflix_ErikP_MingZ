@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#44AF81, #22533E);
+    background-attachment: fixed; /* Fija el fondo para que no se mueva al hacer scroll */
+    background-size: cover; /* Asegura que cubra toda la pantalla */
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #1cc562;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.buttons button {
+    margin: 0 5px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.register {
+    background-color: #22533E;
+    color: white;
+    border-radius: 5px;
+}
+
+.movies {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.movie {
+    width: 150px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.movie img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.movie p {
+    font-size: 14px;
+    margin: 5px 0;
+}
