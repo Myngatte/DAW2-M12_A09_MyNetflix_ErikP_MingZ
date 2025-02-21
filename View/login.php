@@ -6,6 +6,15 @@
     <title>Log in</title>
 </head>
 <body>
-    <form action=""></form>
+    <h2>Login</h2>
+    <form action="">
+    <label for="username">Nombre de Usuario:</label>
+    <input type="text" id="username" name="username"><br><br>
+
+    <label for="contrasena">Contraseña:</label>
+    <input type="password" id="contrasena" name="contrasena"><br><br>
+
+    <button type="submit">Login</button>
+    </form>
 </body>
 </html>

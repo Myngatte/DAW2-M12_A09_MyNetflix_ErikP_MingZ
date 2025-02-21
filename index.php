@@ -3,7 +3,7 @@ require_once "./PHP/conection.php/conexion.php";
 
 // Consulta SQL para obtener películas
 $sql = "SELECT id_peli, nom_peli, portada FROM tbl_pelis";
-$stmt = $pdo->prepare($sql);
+$stmt = $conn->prepare($sql);
 $stmt->execute();
 $peliculas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
