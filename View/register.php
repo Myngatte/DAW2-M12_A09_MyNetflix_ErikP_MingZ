@@ -10,9 +10,12 @@
     <form action="registro.php" method="POST">
         <label for="username">Nombre de Usuario:</label>
         <input type="text" id="username" name="username"><br><br>
+        <span style="color: red;" id="username_mal"><?php echo (isset($_GET['error']) && $_GET['error'] === "emailExistente") ? "Este email ya existe." : "";?></span>
 
         <label for="email">Correo Electrónico:</label>
         <input type="email" id="email" name="email"><br><br>
+        <span style="color: red;" id="correo_mal"><?php echo (isset($_GET['error']) && $_GET['error'] === "emailExistente") ? "Este email ya existe." : "";?></span>
+
 
         <label for="contrasena">Contraseña:</label>
         <input type="password" id="contrasena" name="contrasena"><br><br>
