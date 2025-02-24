@@ -12,9 +12,9 @@ INSERT INTO tbl_rol_staff (nom_rol_staff) VALUES
 INSERT INTO tbl_users (username, email, contrasena, nombre_usr, apellido_usr, fecha_nac, genero_usr, estado, rol_user) VALUES
 ('erikp', 'erikp@gmail.com', 'password123.', 'Erik', 'Penas', '1999-05-15', 'Masculino', 'Aceptado', 1),
 ('mingz', 'mingz@gmail.com', 'password123.', 'Ming', 'Zhou', '1999-05-20', 'Masculino', 'Aceptado', 1),
-('jhonnydeep', 'johndoe@example.com', 'password123.', 'Jhony', 'Deep', '1990-05-15', 'Masculino', 'Aceptado', 2),
+('jhonnydeep', 'johndoe@gmail.com', 'password123.', 'Jhony', 'Deep', '1990-05-15', 'Masculino', 'Aceptado', 2),
 ('benitoc', 'johndoe@example.com', 'password123.', 'Benito', 'Camela', '1969-05-15', 'Masculino', 'Rechazado', 2),
-('janedoe', 'janedoe@example.com', 'password123.', 'Jane', 'Doe', '1992-08-22', 'Femenino', 'Pendiente', 2);
+('janedoe', 'janedoe@hotmail.com', 'password123.', 'Jane', 'Doe', '1992-08-22', 'Femenino', 'Pendiente', 2);
 
 -- Insert into tbl_pelis
 INSERT INTO tbl_pelis (nom_peli, descripcion, generos, duracion, portada, trailer) VALUES
