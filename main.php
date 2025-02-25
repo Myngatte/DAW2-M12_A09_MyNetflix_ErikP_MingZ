@@ -32,11 +32,10 @@ try {
     </header>
 
     <h2>Películas Disponibles</h2>
-    <div class="movies">
+        <div class="movies">
         <?php foreach ($peliculas as $peli): ?>
             <div class="movie">
-                <img src="<?= htmlspecialchars($peli['portada']) ?>" alt="<?= htmlspecialchars($peli['nom_peli']) ?>">
-                <p>ID: <?= $peli['id_peli'] ?></p>
+                <img src="<?= htmlspecialchars('./IMG/Pelis/' . $peli['portada']) ?>" alt="<?= htmlspecialchars($peli['nom_peli']) ?>">
                 <p><?= htmlspecialchars($peli['nom_peli']) ?></p>
             </div>
         <?php endforeach; ?>
