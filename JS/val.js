@@ -33,17 +33,14 @@ window.onload = function() {
     document.getElementById('apellido').addEventListener('blur', function() {
         validarApellido(this);
     });
-    document.getElementById('descripcion').addEventListener('keyup', function() {
+    document.getElementById('fecha_nac').addEventListener('blur', function() {
         validarDesc(this);
-    });
-    document.getElementById('descripcion').addEventListener('blur', function() {
-        validarDesc(this);
-    });
-    document.getElementById('password').addEventListener('keyup', function() {
-        validarPswd(this);
     });
     document.getElementById('password').addEventListener('blur', function() {
         validarPswd(this);
+    });
+    document.getElementById('rep').addEventListener('blur', function() {
+        validarRepPswd(this);
     });
 };
 
@@ -55,10 +52,11 @@ function validarFormulario() {
     let emailValido = validarEmail(document.getElementById('email'));
     let nombreValido = validarNombre(document.getElementById('nombre'));
     let apellidoValido = validarApellido(document.getElementById('apellido'));
-    let descValido = validarDesc(document.getElementById('descripcion'));
+    let descValido = validarDesc(document.getElementById('fecha_nac'));
     let pswdValido = validarPswd(document.getElementById('password'));
+    let repValido = validarRepPswd(document.getElementById('password'));
 
-    return usuarioValido && emailValido && nombreValido && apellidoValido && descValido && pswdValido;
+    return usuarioValido && emailValido && nombreValido && apellidoValido && descValido && pswdValido && repValido;
 }
 
 // ------------------------------------------------------------------------------------------------------------------
@@ -71,6 +69,7 @@ function validarFormulario() {
 function validarUsuario(input) {
     const userField = input.value.trim();
     const userError = document.getElementById("username_mal");
+    
 
     if (userField === "") {
         userError.textContent = "El nombre de usuario no puede estar vacío.";
@@ -133,9 +132,16 @@ function validarEmail(input) {
 function validarNombre(input) {
     const nameField = input.value.trim();
     const nameError = document.getElementById("nombre_mal");
+    const regexNombre = /^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$/
 
     if (nameField === "") {
         nameError.textContent = "El nombre no puede estar vacío.";
+        input.classList.add("error");
+        return false;
+    }
+
+    if (!regexNombre.test(nameField)) {
+        pswdError.textContent = "Un nombre solo puede contener letras.";
         input.classList.add("error");
         return false;
     }
@@ -160,9 +166,16 @@ function validarNombre(input) {
 function validarApellido(input) {
     const surnameField = input.value.trim();
     const surnameError = document.getElementById("apellido_mal");
+    const regexAp = /^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(?:\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$/
 
     if (surnameField === "") {
         surnameError.textContent = "El apellido no puede estar vacío.";
+        input.classList.add("error");
+        return false;
+    }
+
+    if (!regexAp.test(surnameField)) {
+        pswdError.textContent = "Un apellido solo puede contener letras.";
         input.classList.add("error");
         return false;
     }
@@ -180,20 +193,29 @@ function validarApellido(input) {
 }
 
 
-// VALIDACION DESCRIPCION
+// VALIDACION fecha_nac
 // - No puede contener mas de 100 caracteres.
 
 function validarDesc(input) {
-    const descField = input.value.trim();
-    const descError = document.getElementById("descripcion_mal");
+    const fechField = new Date(input.value);
+    const hoy = new Date();
+    const fechError = document.getElementById("fecha_nac_mal");
 
-    if (descField.length > 100) {
-        descError.textContent = "La descripcion no puede contener mas de 100 caracteres.";
+    // Calcular la edad
+    let edad = hoy.getFullYear() - fechField.getFullYear();
+    const mes = hoy.getMonth() - fechField.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechField.getDate())) {
+      edad--;
+    }
+
+    if (edad < 16) {
+        fechError.textContent = "Debes de tener más de 16 años para crearte una cuenta.";
         input.classList.add("error");
         return false;
     }
 
-    descError.textContent = "";
+    fechError.textContent = "";
     input.classList.remove("error");
 
     return true;
@@ -208,9 +230,16 @@ function validarDesc(input) {
 function validarPswd(input) {
     const pswdField = input.value.trim();
     const pswdError = document.getElementById("pswd_mal");
+    const regexPswd = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
     if (pswdField === "") {
         pswdError.textContent = "La contraseña no puede estar vacía.";
+        input.classList.add("error");
+        return false;
+    }
+    
+    if (!regexPswd.test(pswdField)) {
+        pswdError.textContent = "La contraseña debe tener una mayúscula y minúscula, un número, un carácter especial y ha de ser de un mínimo de 8 carácteres.";
         input.classList.add("error");
         return false;
     }
@@ -232,3 +261,40 @@ function validarPswd(input) {
 
     return true;
 }
+
+function validarRepPswd(input){
+    const repPswdField = input.value.trim();
+    const pswdField = document.getElementById("password").value.trim();
+    const repError = document.getElementById("rep_mal").value.trim();
+
+    if (repPswdField != pswdField){
+        repError.textContent = "Se ha de repetir la contraseña correctamente";
+        input.classList.add("error");
+        return false;
+    }
+
+    repError.textContent = "";
+    input.classList.remove("error");
+
+    return true;
+}
+
+// window.onload = function() {
+//     document.getElementById('formLogin').addEventListener('submit', function(event) {
+//         if (!validarLogin()) {
+//             event.preventDefault();
+//         }
+//     });    
+// };
+
+// function validarFormulario() {
+//     let userValido = validarUser(document.getElementById('user'));
+//     let pwdValido = validarLoginPwd(document.getElementById('password'));
+
+
+//     return userValido && pwdValido;
+// }
+
+// function validarUser(input){
+
+// }

@@ -7,13 +7,35 @@ try {
         // Recuperar datos del formulario
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $contrasena = password_hash($_POST['contrasena'], PASSWORD_BCRYPT); 
-        $nombre_usr = $_POST['nombre_usr'];
-        $apellido_usr = $_POST['apellido_usr'];
+        $contrasena = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+        $nombre_usr = $_POST['nombre'];
+        $apellido_usr = $_POST['apellido'];
         $fecha_nac = $_POST['fecha_nac'];
         $genero_usr = $_POST['genero_usr'];
         $estado = 'Pendiente'; 
         $rol_user = 2;
+
+        // $sqlUser = "SELECT * FROM tbl_USERS WHERE username = :usr";
+        // $stmt1 = $pdo->prepare($checkId);
+        // $stmt1->bindParam(':usr', $username);
+        // $stmt1->execute();
+        // $result1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+
+        // if ($result1 && count($result1) > 0) {
+        //     header("Location: ../../View/register.php?error=usuarioExistente"); 
+        //     exit();
+        // }
+
+        // $checkEmail = "SELECT * FROM tbl_USERS WHERE email = :em";
+        // $stmt = $pdo->prepare($checkEmail);
+        // $stmt->bindParam(':em', $email); 
+        // $stmt->execute();
+        // $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // if ($result && count($result) > 0) {
+        //     header("Location: ../../View/register.php?error=emailExistente"); 
+        //     exit();
+        // }
 
         // Preparar la consulta SQL
         $sql = "INSERT INTO tbl_users (username, email, contrasena, nombre_usr, apellido_usr, fecha_nac, genero_usr, estado, rol_user)
@@ -35,7 +57,7 @@ try {
         $stmt->execute();
 
         // Mensaje de éxito
-        header("../../view/register.php?register=success");
+        header("Location: ../../View/login.php?register=success");
         exit();
     }
 } catch (PDOException $e) {
