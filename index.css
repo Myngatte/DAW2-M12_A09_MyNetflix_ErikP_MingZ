@@ -1,0 +1,42 @@
+.container-content {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2.42rem;
+    border-radius: 18.7px;
+    box-shadow: 0 0 24.2px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    width: 181.5px;
+    height: auto;
+    margin-bottom: 1.21rem;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 2.42rem;
+    font-size: 2.98rem;
+}
+
+p {
+    color: white;
+    font-size: 1.452rem;
+    margin-bottom: 1.21rem;
+}
+
+.btn-custom {
+    background-color: #39B781;
+    color: white;
+    padding: 0.96rem 2.42rem;
+    border-radius: 31px;
+    border: none;
+    font-size: 1.331rem;
+    transition: all 0.3s ease;
+}
+
+.col-md-6 {
+    min-height: 121px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+} 
