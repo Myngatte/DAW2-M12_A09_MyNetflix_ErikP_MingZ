@@ -54,7 +54,7 @@ function validarFormulario() {
     let apellidoValido = validarApellido(document.getElementById('apellido'));
     let descValido = validarDesc(document.getElementById('fecha_nac'));
     let pswdValido = validarPswd(document.getElementById('password'));
-    let repValido = validarRepPswd(document.getElementById('password'));
+    let repValido = validarRepPswd(document.getElementById('rep'));
 
     return usuarioValido && emailValido && nombreValido && apellidoValido && descValido && pswdValido && repValido;
 }
@@ -197,27 +197,45 @@ function validarApellido(input) {
 // - No puede contener mas de 100 caracteres.
 
 function validarDesc(input) {
-    const fechField = new Date(input.value);
-    const hoy = new Date();
+    const fechField = input.value.trim(); // Obtén el valor del campo y elimina espacios en blanco
     const fechError = document.getElementById("fecha_nac_mal");
 
-    // Calcular la edad
-    let edad = hoy.getFullYear() - fechField.getFullYear();
-    const mes = hoy.getMonth() - fechField.getMonth();
-
-    if (mes < 0 || (mes === 0 && hoy.getDate() < fechField.getDate())) {
-      edad--;
+    // Verifica si el campo está vacío
+    if (fechField === "") {
+        fechError.textContent = "La fecha de nacimiento no puede estar vacía.";
+        input.classList.add("error");
+        return false;
     }
 
+    // Convierte el valor del campo a un objeto Date
+    const fechaNacimiento = new Date(fechField);
+    const hoy = new Date();
+
+    // Verifica si la fecha es válida
+    if (isNaN(fechaNacimiento.getTime())) {
+        fechError.textContent = "La fecha de nacimiento no es válida.";
+        input.classList.add("error");
+        return false;
+    }
+
+    // Calcular la edad
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+        edad--;
+    }
+
+    // Verifica si la edad es menor a 16 años
     if (edad < 16) {
         fechError.textContent = "Debes de tener más de 16 años para crearte una cuenta.";
         input.classList.add("error");
         return false;
     }
 
+    // Si todo está bien, limpia el mensaje de error y elimina la clase de error
     fechError.textContent = "";
     input.classList.remove("error");
-
     return true;
 }
 
@@ -265,7 +283,7 @@ function validarPswd(input) {
 function validarRepPswd(input){
     const repPswdField = input.value.trim();
     const pswdField = document.getElementById("password").value.trim();
-    const repError = document.getElementById("rep_mal").value.trim();
+    const repError = document.getElementById("rep_mal");
 
     if (repPswdField != pswdField){
         repError.textContent = "Se ha de repetir la contraseña correctamente";

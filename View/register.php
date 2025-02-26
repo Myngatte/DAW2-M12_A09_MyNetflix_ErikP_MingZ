@@ -5,9 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <script src="../JS/val.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../CSS/main.css">
 </head>
 <body>
+<?php if(isset($_GET['error']) && $_GET['error'] === 'usuarioExistente'): ?>
+    <script>
+        Swal.fire({
+        title: '¡Usuario Existente!',
+        text: 'Ya existe un usuario con el mismo nombre de usuario.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+        }).then(() => {
+            // Elimina el parámetro de la URL después de mostrar el SweetAlert
+            const url = new URL(window.location.href);
+            url.searchParams.delete('error'); // Elimina el parámetro 'register'
+            window.history.replaceState({}, document.title, url.toString()); // Actualiza la URL sin recargar la página
+        });
+    </script>
+  <?php endif; 
+  if(isset($_GET['error']) && $_GET['error'] === 'emailExistente'): ?>
+    <script>
+        Swal.fire({
+            title: '¡Email Existente!',
+            text: 'Ya existe un usuario con el mismo email.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        }).then(() => {
+            // Elimina el parámetro de la URL después de mostrar el SweetAlert
+            const url = new URL(window.location.href);
+            url.searchParams.delete('error'); // Elimina el parámetro 'register'
+            window.history.replaceState({}, document.title, url.toString()); // Actualiza la URL sin recargar la página
+        });
+    </script>
+    <?php endif; ?>
     <h2>Formulario de Registro</h2>
     <form action="../PHP/user/register.php" method="POST" id="formRegister">
         <label for="username">Nombre de Usuario:</label>
