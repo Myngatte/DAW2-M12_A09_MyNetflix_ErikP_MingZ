@@ -1,6 +1,6 @@
 body {
     background: linear-gradient(rgba(57, 183, 129, 0.7), rgba(34, 83, 62, 0.7)),
-                url('../fondoPortada.png') no-repeat center center fixed;
+                url('../IMG/Web/fondoPortada.png') no-repeat center center fixed;
     background-size: cover;
     color: white;
     font-family: Arial, sans-serif;

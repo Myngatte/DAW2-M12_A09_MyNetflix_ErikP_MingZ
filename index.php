@@ -1,5 +1,5 @@
 <?php
-    // Puedes agregar configuraciones adicionales aquí si es necesario
+    
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +14,7 @@
     <div class="overlay"></div>
     <div class="container vh-100 d-flex align-items-center justify-content-center">
         <div class="container-content text-center">
-            <img src="logo.png" alt="Meiga Logo" class="logo">
+            <img src="./IMG/Web/logo.png" alt="Meiga Logo" class="logo">
             <h1>¡Bienvenido a Meiga!</h1>
             <div class="row mt-4 justify-content-center">
                 <div class="col-md-6 d-flex flex-column align-items-center">
