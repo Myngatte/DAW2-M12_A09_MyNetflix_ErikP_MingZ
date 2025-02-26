@@ -279,22 +279,3 @@ function validarRepPswd(input){
     return true;
 }
 
-// window.onload = function() {
-//     document.getElementById('formLogin').addEventListener('submit', function(event) {
-//         if (!validarLogin()) {
-//             event.preventDefault();
-//         }
-//     });    
-// };
-
-// function validarFormulario() {
-//     let userValido = validarUser(document.getElementById('user'));
-//     let pwdValido = validarLoginPwd(document.getElementById('password'));
-
-
-//     return userValido && pwdValido;
-// }
-
-// function validarUser(input){
-
-// }

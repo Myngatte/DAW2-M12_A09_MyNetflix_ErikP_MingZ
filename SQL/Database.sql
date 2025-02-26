@@ -10,7 +10,7 @@ CREATE TABLE tbl_users (
     apellido_usr VARCHAR(50) NOT NULL,
     fecha_nac DATE NOT NULL,
     genero_usr ENUM("Masculino","Femenino"),
-    estado ENUM("Aceptado","Pendiente","Rechazado"),
+    estado ENUM("Aceptado","Pendiente"),
     rol_user INT NOT NULL
 )engine innoDB;
 

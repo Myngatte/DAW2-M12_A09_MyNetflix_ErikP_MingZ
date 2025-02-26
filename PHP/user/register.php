@@ -1,5 +1,5 @@
 <?php
-require "../conection.php/conexion.php";
+require "../conection/conexion.php";
 
 try {
     // Verificar si el formulario fue enviado
