@@ -1,5 +1,6 @@
+// ------------------------------------------------------------MOSTRAR DATOS 
 document.addEventListener("DOMContentLoaded", () => {
-    cargarDatos("usuarios"); // Cargar usuarios por defecto
+    cargarDatos("usuarios"); //cargar usuarios por defecto
 });
 
 function cargarDatos(vista) {
@@ -23,6 +24,7 @@ function actualizarTabla(vista, data) {
     tablaHeader.innerHTML = "";
     tablaBody.innerHTML = "";
 
+    // Usuarios
     if (vista === "usuarios") {
         titulo.textContent = "Gestión de Usuarios";
         tablaHeader.innerHTML = `
@@ -45,13 +47,14 @@ function actualizarTabla(vista, data) {
                     <td>${user.username}</td>
                     <td>${user.nom_rol}</td>
                     <td>
-                        <a href='./edit_user.php?id=${user.id_usr}'><button class='btn'>Editar</button></a>
-                        <a href='../../Procesos/delete_user.php?id=${user.id_usr}'><button class='btn-delete'>Eliminar</button></a>
+                        <a href='../PHP/admin/editarU.php?id=${user.id_usr}'><button class='btn'>Editar</button></a>
+                        <a href='../PHP/admin/EliminarU.php?id=${user.id_usr}'><button class='btn-delete'>Eliminar</button></a>
                     </td>
                 </tr>
             `;
         });
 
+        // Pelis
     } else if (vista === "pelis") {
         titulo.textContent = "Gestión de Películas";
         tablaHeader.innerHTML = `
@@ -72,13 +75,22 @@ function actualizarTabla(vista, data) {
                     <td>${peli.nom_peli}</td>
                     <td>${peli.descripcion}</td>
                     <td>${peli.duracion}</td>
-                    <td><img src="${peli.portada}" width="50"></td>
+                    <td><img src="../IMG/pelis/${peli.portada}" width="50"></td>
                     <td>
-                        <a href='./edit_peli.php?id=${peli.id_peli}'><button class='btn'>Editar</button></a>
-                        <a href='../../Procesos/delete_peli.php?id=${peli.id_peli}'><button class='btn-delete'>Eliminar</button></a>
+                        <a href='../PHP/admin/editarP.php?id=${peli.id_peli}'><button class='btn'>Editar</button></a>
+                        <a href='../PHP/admin/EliminarP.php?id=${peli.id_peli}'><button class='btn-delete'>Eliminar</button></a>
                     </td>
                 </tr>
             `;
         });
     }
 }
+
+// ------------------------------------------------------------CREAR DATOS
+
+
+// ------------------------------------------------------------EDITAR DATOS
+
+// ------------------------------------------------------------ELIMINAR DATOS
+
+
