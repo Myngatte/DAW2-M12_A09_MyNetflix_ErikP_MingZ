@@ -1,5 +1,5 @@
 <?php
-include '../PHP/conection.php/conexion.php';
+include '../conection.php/conexion.php';
 
 $vista = isset($_GET['vista']) ? $_GET['vista'] : '';
 
