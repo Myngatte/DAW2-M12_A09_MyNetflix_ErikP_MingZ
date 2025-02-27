@@ -1,5 +1,5 @@
 <?php
-require_once "./PHP/conection.php/conexion.php"; 
+require_once "./PHP/conection/conexion.php"; 
 
 // Consulta SQL para obtener películas
 try {

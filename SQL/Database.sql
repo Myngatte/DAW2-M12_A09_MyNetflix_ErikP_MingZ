@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS Meiga;
 Create Database Meiga;
 Use Meiga;
 

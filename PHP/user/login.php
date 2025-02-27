@@ -31,6 +31,7 @@ try {
                     'error' => 'Tu cuenta está pendiente de aprobación.'
                 ]);
             } else {
+                $_SESSION["activeUser"] = $result["id_usr"];
                 echo json_encode([
                 'existe' => true,
                 'valid' => true

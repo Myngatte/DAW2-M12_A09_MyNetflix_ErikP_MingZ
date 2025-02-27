@@ -1,8 +1,9 @@
 <?php
+session_start();
 $host = "localhost";
 $dbname = "Meiga";
 $username = "root";  
-$password = "qweQWE123"; 
+$password = ""; 
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
