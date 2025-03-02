@@ -9,8 +9,8 @@ if (!isset($_POST['user']) || !isset($_POST['password'])) {
     exit();
 }
 
-$usernameOrEmail = $_POST['user'];
-$password = $_POST['password'];
+$usernameOrEmail = htmlspecialchars($_POST['user']);
+$password = htmlspecialchars($_POST['password']);
 
 try {
     // Busca el usuario en la base de datos
