@@ -50,6 +50,7 @@ header {
 .info p {
     margin-bottom: 15px;
 }
+
 .info .duration-likes {
     display: flex;
     align-items: center;
@@ -61,6 +62,7 @@ header {
     padding: 5px 10px;
     border-radius: 8px;
 }
+
 .btn-watch {
     background-color: #fff;
     color: #333;
@@ -74,21 +76,23 @@ header {
 .btn-watch:hover {
     background-color: #ccc;
 }
+
 /* Botón de cerrar (o volver) en la esquina */
-.close-btn {
+.btn-volver {
+    background-image: url("../IMG/return.png");
+    background-size: cover;
     position: absolute;
-    top: 20px;
-    right: 20px;
-    color: #fff;
-    font-size: 1.2rem;
+    right: 1%;
     text-decoration: none;
-    background-color: rgba(255,255,255,0.2);
-    padding: 5px 10px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
 }
-.close-btn:hover {
-    background-color: rgba(255,255,255,0.4);
-    color: #333;
+
+.btn-volver img {
+    width: auto;
+    height: auto;
 }
 
 .logo {
@@ -147,6 +151,24 @@ input {
     margin: 5px 0;
 }
 
+
+#likeBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    display: inline-flex;       /* Para alinear ícono y texto si lo hubiera */
+    align-items: center;        /* Centra verticalmente */
+    margin-right: 5px;          /* Espacio a la derecha (opcional) */
+  }
+  
+  #likeBtn i {
+    font-size: 1.30rem;            /* Ajusta el tamaño del ícono */
+    color: #ff0000;
+    line-height: 1;             /* Asegura que no se expanda verticalmente */
+    vertical-align: middle;     /* Centra verticalmente el ícono */
+  }
 
 .likes-tooltip {
     display: none; /* Oculto por defecto */

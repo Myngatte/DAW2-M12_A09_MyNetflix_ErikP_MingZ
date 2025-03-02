@@ -22,6 +22,19 @@ try {
   $stmt->execute();
   $peli = $stmt->fetch(PDO::FETCH_ASSOC);
 
+  $sqlCheck = "SELECT id_like FROM tbl_likes WHERE user_liked = :user AND peli_liked = :movie";
+  $stmtCheck = $conn->prepare($sqlCheck);
+  $stmtCheck->bindParam(':user', $_SESSION["activeUser"], PDO::PARAM_INT);
+  $stmtCheck->bindParam(':movie', $id, PDO::PARAM_INT);
+  $stmtCheck->execute();
+  $like = $stmtCheck->fetch(PDO::FETCH_ASSOC);
+
+  if($like) {
+    $heartPage = '<i class="fas fa-heart"></i>';
+  } else {
+    $heartPage = '<i class="far fa-heart"></i>';
+  }
+
   // Consulta para obtener géneros (tabla tbl_pgeneros)
   $sqlGen = "SELECT id_genero, nom_genero FROM tbl_pgeneros WHERE id_genero = :id";
   $stmtGen = $conn->prepare($sqlGen);
@@ -56,7 +69,7 @@ try {
   </header>
 
   <!-- Botón para cerrar o volver (por ejemplo, a main.php) -->
-  <a href="main.php" class="close-btn" title="Volver">&times;</a>
+  <a href="../main.php" class="btn-volver" title="Volver"></a>
 
   <div class="container-peli">
     <div class="poster">
@@ -73,7 +86,7 @@ try {
             <?php
                 // Opcional: si ya se ha dado like, muestra un corazón relleno, de lo contrario sin relleno.
                 // Esto se puede determinar con una consulta previa al servidor.
-                echo '<i class="far fa-heart"></i>';
+                echo $heartPage;
             ?>
         </button><span id="likeCount"><?php echo htmlspecialchars($peli['likes']); ?></span></span>
       </div>
