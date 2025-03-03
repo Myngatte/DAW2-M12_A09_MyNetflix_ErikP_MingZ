@@ -1,3 +1,7 @@
+<?php
+require '../PHP/admin/conexion.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -114,13 +118,32 @@
             <h2>Crear Película</h2>
             <form id="form-crear-peli" enctype="multipart/form-data">
                 <label for="nombre-peli">Nombre:</label>
-                <input type="text" id="nombre-peli" name="nombre" >
+                <input type="text" id="nombre-peli" name="nombre" required>
+                
                 <label for="descripcion-peli">Descripción:</label>
-                <textarea id="descripcion-peli" name="descripcion" ></textarea>
-                <label for="duracion-peli">Duración (minutos):</label>
-                <input type="number" id="duracion-peli" name="duracion" >
+                <textarea id="descripcion-peli" name="descripcion" required></textarea>
+                
+                <label for="duracion-peli">Duración:</label>
+                <input type="time" id="duracion-peli" name="duracion" step="1" required>
+                
+                <label>Géneros:</label>
+                <div class="generos-container">
+                    <?php
+                    $sql = "SELECT id_genero, nom_genero FROM tbl_pgeneros";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    while ($row = $stmt->fetch()) {
+                        echo "<div class='genero-checkbox'>";
+                        echo "<input type='checkbox' id='genero-" . $row['id_genero'] . "' name='generos[]' value='" . $row['id_genero'] . "'>";
+                        echo "<label for='genero-" . $row['id_genero'] . "'>" . $row['nom_genero'] . "</label>";
+                        echo "</div>";
+                    }
+                    ?>
+                </div>
+                
                 <label for="portada-peli">Portada:</label>
-                <input type="file" id="portada-peli" name="portada" accept="image/*" >
+                <input type="file" id="portada-peli" name="portada" accept="image/*" required>
+                
                 <button type="submit">Crear</button>
             </form>
         </div>
@@ -133,14 +156,34 @@
             <h2>Editar Película</h2>
             <form id="form-editar-peli" enctype="multipart/form-data">
                 <input type="hidden" id="id-editar-peli" name="id">
+                
                 <label for="nombre-editar-peli">Nombre:</label>
-                <input type="text" id="nombre-editar-peli" name="nombre" >
+                <input type="text" id="nombre-editar-peli" name="nombre" required>
+                
                 <label for="descripcion-editar-peli">Descripción:</label>
-                <textarea id="descripcion-editar-peli" name="descripcion" ></textarea>
-                <label for="duracion-editar-peli">Duración (minutos):</label>
-                <input type="number" id="duracion-editar-peli" name="duracion" >
+                <textarea id="descripcion-editar-peli" name="descripcion" required></textarea>
+                
+                <label for="duracion-editar-peli">Duración:</label>
+                <input type="time" id="duracion-editar-peli" name="duracion" step="1" required>
+                
+                <label>Géneros:</label>
+                <div class="generos-container">
+                    <?php
+                    $sql = "SELECT id_genero, nom_genero FROM tbl_pgeneros";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    while ($row = $stmt->fetch()) {
+                        echo "<div class='genero-checkbox'>";
+                        echo "<input type='checkbox' id='genero-editar-" . $row['id_genero'] . "' name='generos[]' value='" . $row['id_genero'] . "'>";
+                        echo "<label for='genero-editar-" . $row['id_genero'] . "'>" . $row['nom_genero'] . "</label>";
+                        echo "</div>";
+                    }
+                    ?>
+                </div>
+                
                 <label for="portada-editar-peli">Portada:</label>
                 <input type="file" id="portada-editar-peli" name="portada" accept="image/*">
+                
                 <button type="submit">Guardar Cambios</button>
             </form>
         </div>

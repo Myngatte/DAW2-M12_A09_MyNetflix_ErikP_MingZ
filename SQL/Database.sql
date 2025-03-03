@@ -30,7 +30,6 @@ CREATE TABLE tbl_pelis (
     id_peli INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     nom_peli VARCHAR(100) NOT NULL,
     descripcion VARCHAR(255) NOT NULL,
-    generos INT NOT NULL,
     duracion TIME NOT NULL,
     portada VARCHAR(255) NOT NULL,
     trailer VARCHAR(255) NULL

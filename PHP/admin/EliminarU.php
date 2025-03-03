@@ -1,22 +1,20 @@
 <?php
-session_start();
+
 require_once './conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Obtener el ID del usuario
-        $id_usr = $_POST['id_usr'];
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id = $data['id_usr'];
 
-        // Eliminar el usuario de la base de datos
-        $sql = "DELETE FROM usuarios WHERE id_usr = :id_usr";
+        $sql = "DELETE FROM tbl_users WHERE id_usr = :id";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id_usr', $id_usr);
-
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
 
-        echo json_encode(['message' => 'Usuario eliminado exitosamente']);
+        echo json_encode(['success' => true]);
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al eliminar el usuario: ' . $e->getMessage()]);
+        echo json_encode(['error' => $e->getMessage()]);
     }
 }
 ?>

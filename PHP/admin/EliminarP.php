@@ -1,22 +1,34 @@
 <?php
-session_start();
+
 require_once './conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Obtener el ID de la película
-        $id_peli = $_POST['id_peli'];
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id = $data['id_peli'];
 
-        // Eliminar la película de la base de datos
-        $sql = "DELETE FROM peliculas WHERE id_peli = :id_peli";
+        // Iniciar transacción
+        $conn->beginTransaction();
+
+        // Primero eliminar los registros de la tabla intermedia genero_peli
+        $sql_generos = "DELETE FROM genero_peli WHERE id_pelicula = :id";
+        $stmt_generos = $conn->prepare($sql_generos);
+        $stmt_generos->bindParam(':id', $id);
+        $stmt_generos->execute();
+
+        // Luego eliminar la película
+        $sql = "DELETE FROM tbl_pelis WHERE id_peli = :id";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':id_peli', $id_peli);
-
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
 
-        echo json_encode(['message' => 'Película eliminada exitosamente']);
+        // Confirmar transacción
+        $conn->commit();
+        echo json_encode(['success' => true]);
     } catch (PDOException $e) {
-        echo json_encode(['error' => 'Error al eliminar la película: ' . $e->getMessage()]);
+        // Revertir cambios si hay error
+        $conn->rollBack();
+        echo json_encode(['error' => $e->getMessage()]);
     }
 }
 ?>

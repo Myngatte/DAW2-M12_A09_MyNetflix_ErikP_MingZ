@@ -40,22 +40,22 @@ INSERT INTO tbl_pgeneros (nom_genero) VALUES
 ('Suspense');
 
 -- Insert into tbl_pelis
-INSERT INTO tbl_pelis (nom_peli, descripcion, generos, duracion, portada, trailer) VALUES
-('Your Name', 'Dos adolescentes descubren que están conectados misteriosamente a través de sus sueños.', 3, '01:46:00', 'Your_Name_poster.png', 'yourname_trailer.mp4'),
-('El viaje de Chihiro', 'Una niña entra en un mundo mágico donde debe trabajar en una casa de baños para espíritus.', 1, '02:05:00', 'El_viaje_de_chihiro.png', 'spirited_away_trailer.mp4'),
-('Attack on Titan: Chronicle', 'La humanidad lucha por sobrevivir contra gigantes que devoran humanos.', 2, '02:00:00', 'AOT_chronicle.png', 'aot_trailer.mp4'),
-('Mi vecino Totoro', 'Dos niñas descubren criaturas mágicas en su nuevo hogar en el campo.', 1, '01:26:00', 'Mi_Vecino_Totoro.png', 'totoro_trailer.mp4'),
-('Demon Slayer: Mugen Train', 'Tanjiro y sus compañeros se embarcan en una peligrosa misión en un tren.', 2, '01:57:00', 'Demon_Slayer_Mugen_Train.png', 'demonslayer_trailer.mp4'),
-('La tumba de las luciérnagas', 'La historia de dos hermanos que luchan por sobrevivir durante la Segunda Guerra Mundial.', 3, '01:29:00', 'La_Tumba_de_Las_Luciernagas.png', 'fireflies_trailer.mp4'),
-('Dragon Ball Super: Broly', 'Goku y Vegeta enfrentan al poderoso guerrero Broly.', 2, '01:40:00', 'DBS_Broly.png', 'broly_trailer.mp4'),
-('El castillo ambulante', 'Una joven maldecida con el cuerpo de una anciana busca romper el hechizo.', 1, '01:59:00', 'El_castillo_ambulante.png', 'howls_castle_trailer.mp4'),
-('Perfect Blue', 'Una idol convertida en actriz comienza a perder el sentido de la realidad.', 3, '01:21:00', 'Perfectblue.png', 'perfect_blue_trailer.mp4'),
-('One Piece Film: Red', 'Luffy y su tripulación descubren secretos sobre una misteriosa cantante.', 2, '01:55:00', 'One_Piece_Film_Red.png', 'onepiece_red_trailer.mp4'),
-('La princesa Mononoke', 'Un príncipe se ve envuelto en un conflicto entre los espíritus del bosque y la humanidad.', 1, '02:13:00', 'Princess_Mononoke.png', 'mononoke_trailer.mp4'),
-('Jujutsu Kaisen 0', 'Un estudiante lucha contra maldiciones mientras intenta controlar sus propios poderes.', 2, '01:45:00', 'Jujutsu_Kaisen_0.png', 'jjk0_trailer.mp4'),
-('Ghost in the Shell', 'Una cyborg policía investiga un misterioso caso de hackeo cerebral.', 1, '01:22:00', 'Ghost_in_the_Shell.png', 'gits_trailer.mp4'),
-('Akira', 'En un Neo-Tokyo post-apocalíptico, un adolescente desarrolla poderes psíquicos.', 1, '02:04:00', 'AKIRA.png', 'akira_trailer.mp4'),
-('El tiempo contigo', 'Una historia de amor entre un joven que puede controlar el clima y una estudiante.', 3, '01:54:00', 'Weathering_with_You.png', 'weathering_trailer.mp4');
+INSERT INTO tbl_pelis (nom_peli, descripcion, duracion, portada, trailer) VALUES
+('Your Name', 'Dos adolescentes descubren que están conectados misteriosamente a través de sus sueños.', '01:46:00', 'Your_Name_poster.png', 'yourname_trailer.mp4'),
+('El viaje de Chihiro', 'Una niña entra en un mundo mágico donde debe trabajar en una casa de baños para espíritus.', '02:05:00', 'El_viaje_de_chihiro.png', 'spirited_away_trailer.mp4'),
+('Attack on Titan: Chronicle', 'La humanidad lucha por sobrevivir contra gigantes que devoran humanos.', '02:00:00', 'AOT_chronicle.png', 'aot_trailer.mp4'),
+('Mi vecino Totoro', 'Dos niñas descubren criaturas mágicas en su nuevo hogar en el campo.', '01:26:00', 'Mi_Vecino_Totoro.png', 'totoro_trailer.mp4'),
+('Demon Slayer: Mugen Train', 'Tanjiro y sus compañeros se embarcan en una peligrosa misión en un tren.', '01:57:00', 'Demon_Slayer_Mugen_Train.png', 'demonslayer_trailer.mp4'),
+('La tumba de las luciérnagas', 'La historia de dos hermanos que luchan por sobrevivir durante la Segunda Guerra Mundial.', '01:29:00', 'La_Tumba_de_Las_Luciernagas.png', 'fireflies_trailer.mp4'),
+('Dragon Ball Super: Broly', 'Goku y Vegeta enfrentan al poderoso guerrero Broly.', '01:40:00', 'DBS_Broly.png', 'broly_trailer.mp4'),
+('El castillo ambulante', 'Una joven maldecida con el cuerpo de una anciana busca romper el hechizo.', '01:59:00', 'El_castillo_ambulante.png', 'howls_castle_trailer.mp4'),
+('Perfect Blue', 'Una idol convertida en actriz comienza a perder el sentido de la realidad.', '01:21:00', 'Perfectblue.png', 'perfect_blue_trailer.mp4'),
+('One Piece Film: Red', 'Luffy y su tripulación descubren secretos sobre una misteriosa cantante.', '01:55:00', 'One_Piece_Film_Red.png', 'onepiece_red_trailer.mp4'),
+('La princesa Mononoke', 'Un príncipe se ve envuelto en un conflicto entre los espíritus del bosque y la humanidad.', '02:13:00', 'Princess_Mononoke.png', 'mononoke_trailer.mp4'),
+('Jujutsu Kaisen 0', 'Un estudiante lucha contra maldiciones mientras intenta controlar sus propios poderes.', '01:45:00', 'Jujutsu_Kaisen_0.png', 'jjk0_trailer.mp4'),
+('Ghost in the Shell', 'Una cyborg policía investiga un misterioso caso de hackeo cerebral.', '01:22:00', 'Ghost_in_the_Shell.png', 'gits_trailer.mp4'),
+('Akira', 'En un Neo-Tokyo post-apocalíptico, un adolescente desarrolla poderes psíquicos.', '02:04:00', 'AKIRA.png', 'akira_trailer.mp4'),
+('El tiempo contigo', 'Una historia de amor entre un joven que puede controlar el clima y una estudiante.', '01:54:00', 'Weathering_with_You.png', 'weathering_trailer.mp4');
 
 -- Insert into tbl_staff
 INSERT INTO tbl_staff (nom_staff, apellido_staff, rol_staff) VALUES

@@ -1,4 +1,3 @@
-// ------------------------------------------------------------MOSTRAR DATOS 
 document.addEventListener("DOMContentLoaded", () => {
     cargarDatos("usuarios"); //cargar usuarios por defecto
 });
@@ -53,7 +52,7 @@ function actualizarTabla(vista, data) {
                     <td>${user.username}</td>
                     <td>${user.email}</td> 
                     <td>${user.genero_usr}</td> 
-                    <td>${user.fecha_nac}</td> 
+                    <td>${user.fecha_nac}</td>
                     <td>${user.nom_rol}</td>
                     <td>
                         <button class='btn' onclick="cargarDatosEditarUsuario('${user.id_usr}', '${user.nombre_usr}', '${user.apellido_usr}', '${user.username}', '${user.email}', '${user.genero_usr}', '${user.fecha_nac}', '${user.nom_rol}')">Editar</button>
@@ -75,21 +74,25 @@ function actualizarTabla(vista, data) {
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Duración</th>
+                <th>Géneros</th>
                 <th>Portada</th>
                 <th>Acciones</th>
             </tr>
         `;
 
         data.forEach(peli => {
+            const generos = peli.nombres_generos || 'Sin géneros';
+            
             tablaBody.innerHTML += `
                 <tr>
                     <td>${peli.id_peli}</td>
                     <td>${peli.nom_peli}</td>
                     <td>${peli.descripcion}</td>
                     <td>${peli.duracion}</td>
+                    <td>${generos}</td>
                     <td><img src="../IMG/pelis/${peli.portada}" width="50"></td>
                     <td>
-                        <button class='btn' onclick="cargarDatosEditarPeli('${peli.id_peli}', '${peli.nom_peli}', '${peli.descripcion}', '${peli.duracion}')">Editar</button>
+                        <button class='btn' onclick='cargarDatosEditarPeli(${JSON.stringify(peli).replace(/'/g, "&#39;")})'>Editar</button>
                         <button class='btn-delete' onclick="cargarDatosEliminarPeli('${peli.id_peli}')">Eliminar</button>
                     </td>
                 </tr>
@@ -145,11 +148,27 @@ function cargarDatosEliminarUsuario(id) {
 
 // ------------------------------------------------------------Modales pelis
 // Función para cargar datos en el modal de editar película
-function cargarDatosEditarPeli(id, nombre, descripcion, duracion) {
-    document.getElementById('id-editar-peli').value = id;
-    document.getElementById('nombre-editar-peli').value = nombre;
-    document.getElementById('descripcion-editar-peli').value = descripcion;
-    document.getElementById('duracion-editar-peli').value = duracion;
+function cargarDatosEditarPeli(peli) {
+    document.getElementById('id-editar-peli').value = peli.id_peli;
+    document.getElementById('nombre-editar-peli').value = peli.nom_peli;
+    document.getElementById('descripcion-editar-peli').value = peli.descripcion;
+    document.getElementById('duracion-editar-peli').value = peli.duracion;
+
+    // Limpiar todos los checkboxes primero
+    const checkboxes = document.querySelectorAll('input[name="generos[]"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+
+    // Marcar los géneros que tiene la película
+    if (peli.ids_generos) {
+        const generosArray = peli.ids_generos.split(',');
+        generosArray.forEach(generoId => {
+            const checkbox = document.getElementById(`genero-editar-${generoId}`);
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
     abrirModal('editar-peli');
 }
 
@@ -159,16 +178,14 @@ function cargarDatosEliminarPeli(id) {
     abrirModal('eliminar-peli');
 }
 
-// FETCH
-
 // CREAR USUARIO
 document.getElementById('form-crear-usuario').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar que se recargue la página al enviar el formulario
+    event.preventDefault();
 
-    const formData = new FormData(this); // Obtener los datos del formulario
+    const formData = new FormData(this);
     fetch('../PHP/admin/CrearU.php', {
         method: 'POST',
-        body: formData,
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
@@ -176,22 +193,22 @@ document.getElementById('form-crear-usuario').addEventListener('submit', functio
             alert(data.error);
         } else {
             alert('Usuario creado exitosamente');
-            cerrarModal('crear-usuario'); // Cerrar el modal después de crear el usuario
-            cargarDatos('usuarios'); // Actualizar la tabla de usuarios
+            cerrarModal('crear-usuario');
+            cargarDatos('usuarios');
+            this.reset();
         }
     })
     .catch(error => console.error('Error al crear usuario:', error));
 });
 
- 
-// Editar usuario
+// EDITAR USUARIO
 document.getElementById('form-editar-usuario').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const formData = new FormData(this); // Obtener los datos del formulario
-        fetch('../PHP/admin/EditarU.php', {
+    const formData = new FormData(this);
+    fetch('../PHP/admin/EditarU.php', {
         method: 'POST',
-        body: formData,
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
@@ -199,13 +216,12 @@ document.getElementById('form-editar-usuario').addEventListener('submit', functi
             alert(data.error);
         } else {
             alert('Usuario actualizado exitosamente');
-            cerrarModal('editar-usuario'); // Cerrar el modal después de actualizar
-            cargarDatos('usuarios'); // Actualizar la tabla de usuarios
+            cerrarModal('editar-usuario');
+            cargarDatos('usuarios');
         }
     })
     .catch(error => console.error('Error al editar usuario:', error));
 });
-
 
 // ELIMINAR USUARIO
 function cargarDatosEliminarUsuario(id) {
@@ -215,7 +231,7 @@ function cargarDatosEliminarUsuario(id) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id_usr: id }), // Enviar el ID del usuario
+            body: JSON.stringify({ id_usr: id })
         })
         .then(response => response.json())
         .then(data => {
@@ -223,22 +239,39 @@ function cargarDatosEliminarUsuario(id) {
                 alert(data.error);
             } else {
                 alert('Usuario eliminado exitosamente');
-                cargarDatos('usuarios'); // Actualizar la tabla de usuarios
+                cargarDatos('usuarios');
             }
         })
         .catch(error => console.error('Error al eliminar usuario:', error));
     }
 }
 
-
 // CREAR PELÍCULA
 document.getElementById('form-crear-peli').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const formData = new FormData(this); // Obtener los datos del formulario
+    const formData = new FormData(this);
+    
+    // Obtener los géneros seleccionados
+    const generosSeleccionados = [];
+    this.querySelectorAll('input[name="generos[]"]:checked').forEach(checkbox => {
+        generosSeleccionados.push(checkbox.value);
+    });
+
+    if (generosSeleccionados.length === 0) {
+        alert('Por favor, seleccione al menos un género');
+        return;
+    }
+
+    // Agregar los géneros al FormData
+    formData.delete('generos[]'); // Eliminar los datos anteriores
+    generosSeleccionados.forEach(genero => {
+        formData.append('generos[]', genero);
+    });
+
     fetch('../PHP/admin/CrearP.php', {
         method: 'POST',
-        body: formData,
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
@@ -246,23 +279,44 @@ document.getElementById('form-crear-peli').addEventListener('submit', function(e
             alert(data.error);
         } else {
             alert('Película creada exitosamente');
-            cerrarModal('crear-peli'); // Cerrar el modal después de crear la película
-            cargarDatos('pelis'); // Actualizar la tabla de películas
+            cerrarModal('crear-peli');
+            cargarDatos('pelis');
+            this.reset();
+            // Desmarcar todos los checkboxes
+            this.querySelectorAll('input[name="generos[]"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
         }
     })
     .catch(error => console.error('Error al crear película:', error));
 });
 
-
-
 // EDITAR PELÍCULA
 document.getElementById('form-editar-peli').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const formData = new FormData(this); // Obtener los datos del formulario
+    const formData = new FormData(this);
+    
+    // Obtener los géneros seleccionados
+    const generosSeleccionados = [];
+    this.querySelectorAll('input[name="generos[]"]:checked').forEach(checkbox => {
+        generosSeleccionados.push(checkbox.value);
+    });
+
+    if (generosSeleccionados.length === 0) {
+        alert('Por favor, seleccione al menos un género');
+        return;
+    }
+
+    // Agregar los géneros al FormData
+    formData.delete('generos[]'); // Eliminar los datos anteriores
+    generosSeleccionados.forEach(genero => {
+        formData.append('generos[]', genero);
+    });
+
     fetch('../PHP/admin/EditarP.php', {
         method: 'POST',
-        body: formData,
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
@@ -270,13 +324,12 @@ document.getElementById('form-editar-peli').addEventListener('submit', function(
             alert(data.error);
         } else {
             alert('Película actualizada exitosamente');
-            cerrarModal('editar-peli'); // Cerrar el modal después de editar
-            cargarDatos('pelis'); // Actualizar la tabla de películas
+            cerrarModal('editar-peli');
+            cargarDatos('pelis');
         }
     })
     .catch(error => console.error('Error al editar película:', error));
 });
-
 
 // ELIMINAR PELÍCULA
 function cargarDatosEliminarPeli(id) {
@@ -286,7 +339,7 @@ function cargarDatosEliminarPeli(id) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id_peli: id }), // Enviar el ID de la película
+            body: JSON.stringify({ id_peli: id })
         })
         .then(response => response.json())
         .then(data => {
@@ -294,13 +347,11 @@ function cargarDatosEliminarPeli(id) {
                 alert(data.error);
             } else {
                 alert('Película eliminada exitosamente');
-                cargarDatos('pelis'); // Actualizar la tabla de películas
+                cargarDatos('pelis');
             }
         })
         .catch(error => console.error('Error al eliminar película:', error));
     }
 }
 
-
-
-// -------------------------------------------------------------
+// FETCH

@@ -11,9 +11,13 @@ if ($vista === 'usuarios') {
             INNER JOIN tbl_roles ON tbl_users.rol_user = tbl_roles.id_rol
             ORDER BY tbl_users.id_usr";
 } elseif ($vista === 'pelis') {
-    $sql = "SELECT id_peli, nom_peli, descripcion, duracion, portada 
-            FROM tbl_pelis 
-            ORDER BY id_peli";
+    $sql = "SELECT p.*, 
+            GROUP_CONCAT(g.nom_genero) as nombres_generos,
+            GROUP_CONCAT(g.id_genero) as ids_generos
+            FROM tbl_pelis p 
+            LEFT JOIN genero_peli gp ON p.id_peli = gp.id_pelicula
+            LEFT JOIN tbl_pgeneros g ON gp.id_genero = g.id_genero
+            GROUP BY p.id_peli";
 } else {
     echo json_encode(["error" => "Vista no válida"]);
     exit;
