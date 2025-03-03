@@ -5,12 +5,19 @@ header('Content-Type: application/json');
 // Leer el JSON enviado por fetch
 $input = json_decode(file_get_contents('php://input'), true);
 
+try {
+ 
+  // Leer el JSON enviado por fetch
+$input = json_decode(file_get_contents('php://input'), true);
+
 // Obtener filtros
 $name   = isset($input['name']) ? trim($input['name']) : '';
 $genres = isset($input['genres']) ? $input['genres'] : [];
 
-// Construir la consulta base
-$sql = "SELECT p.id_peli, p.nom_peli, p.portada FROM tbl_pelis p WHERE 1=1";
+// Consulta base: incluir likes en el SELECT
+$sql = "SELECT p.id_peli, p.nom_peli, p.portada, 
+        (SELECT COUNT(*) FROM tbl_likes l WHERE l.peli_liked = p.id_peli) AS likes 
+        FROM tbl_pelis p WHERE 1=1";
 $params = array();
 
 // Si se filtra por nombre, agregamos la condición
@@ -35,8 +42,6 @@ if (!empty($genres)) {
 }
 
 $stmt = $conn->prepare($sql);
-
-// Bindear todos los parámetros
 foreach ($params as $key => $value) {
   if ($key === ':name') {
     $stmt->bindValue($key, $value, PDO::PARAM_STR);
@@ -44,8 +49,12 @@ foreach ($params as $key => $value) {
     $stmt->bindValue($key, $value, PDO::PARAM_INT);
   }
 }
-
 $stmt->execute();
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode($result);
+  
+
+} catch (PDOException $e) {
+  echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
+}

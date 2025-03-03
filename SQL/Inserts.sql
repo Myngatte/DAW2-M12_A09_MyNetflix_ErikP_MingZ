@@ -103,6 +103,21 @@ INSERT INTO tbl_staff (nom_staff, apellido_staff, rol_staff) VALUES
 ('Nozomu', 'Sasaki', 2),     -- Voz de Kaneda en "Akira"
 ('Kotaro', 'Daigo', 2),      -- Voz de Hodaka en "El tiempo contigo"
 ('Nana', 'Mori', 2);         -- Voz de Hina en "El tiempo contigo"
+('Kaito', 'Ishikawa', 2),  -- Voz adicional en "Your Name"
+('Akari', 'Kitou', 2),     -- Voz adicional en "El viaje de Chihiro"
+('Hiroshi', 'Kamiya', 2),  -- Voz adicional en "Attack on Titan: Chronicle"
+('Yuko', 'Sanpei', 2),     -- Voz adicional en "Mi vecino Totoro"
+('Yoshitsugu', 'Matsuoka', 2), -- Voz adicional en "Demon Slayer: Mugen Train"
+('Ayumi', 'Fujimura', 2),  -- Voz adicional en "La tumba de las luciérnagas"
+('Toshio', 'Furukawa', 2), -- Voz adicional en "Dragon Ball Super: Broly"
+('Takuya', 'Kimura', 2),   -- Voz adicional en "El castillo ambulante"
+('Emiri', 'Katou', 2),     -- Voz adicional en "Perfect Blue"
+('Hiroaki', 'Hirata', 2),  -- Voz adicional en "One Piece Film: Red"
+('Yuko', 'Tanaka', 2),     -- Voz adicional en "La princesa Mononoke"
+('Yuichi', 'Nakamura', 2), -- Voz adicional en "Jujutsu Kaisen 0"
+('Kouichi', 'Yamadera', 2),-- Voz adicional en "Ghost in the Shell"
+('Mitsuru', 'Miyamoto', 2),-- Voz adicional en "Akira"
+('Shun', 'Oguri', 2);      -- Voz adicional en "El tiempo contigo"
 
 -- Insert into staff_peli
 -- Relación entre staff y películas

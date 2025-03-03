@@ -121,9 +121,36 @@ input {
 
 .movies {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
+    flex-direction: column;  /* Cada .genre-section se apila una debajo de la otra */
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.movies.flat-view {
+    flex-direction: row;  /* Pasamos a layout horizontal */
+    flex-wrap: wrap;      /* Permite que las tarjetas se vayan a la siguiente fila */
+    justify-content: center; /* Opcional, para centrar */
+    gap: 20px;
+    /* Ojo: en modo flat, no usas .genre-section ni .movies-row */
+}
+
+.movies-row {
+    display: flex;
+    flex-wrap: nowrap;   /* Fuerza una sola fila (scroll horizontal) */
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scroll-behavior: smooth;
+    overflow: visible;
+}
+.movies-row::-webkit-scrollbar {
+    display: none; /* Oculta scrollbar en Chrome/Safari/Edge basados en Chromium */
+}
+
+/* Cada película en la fila */
+.movies-row .movie {
+    flex: 0 0 auto;  /* Evita que se contraiga */
+    min-width: 150px;
 }
 
 .movie {
@@ -239,31 +266,62 @@ input {
   }
   
   /* Estilo para los botones de género */
-  .genre-btn {
+.genre-btn {
     font-size: 0.9rem;
     padding: 0.375rem 0.75rem;
     border-radius: 20px;
     transition: background-color 0.3s, color 0.3s;
-  }
+}
   
   /* Estado activo de los botones */
-  .genre-btn.active {
+.genre-btn.active {
     background-color: #0d6efd;
     color: #fff;
-  }
+}
   
-  #openFilterModal{
+.genre-section {
+    margin-bottom: 30px;
+}
+
+.genre-section h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+#openFilterModal{
     border-radius: 10px;
     border-color: #22533E;
     background-color: #00dab5;
     color: white;
-  }
+}
 
-  #openFilterModal:hover{
+#openFilterModal:hover{
     border-radius: 10px;
     border-color: #22533E;
     background-color: #1d8e5d;
     color: white;
     box-shadow: 0 0 16px rgba(0, 0, 0, 1);
-  }
+}
+
+.genres-section, .staff-section {
+    margin-top: 20px;
+}
+
+.genres-list, .staff-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.genre, .staff-member {
+    background-color: #005530ad;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.staff-member small {
+    color: #1d768e;
+}
   
