@@ -102,7 +102,7 @@ INSERT INTO tbl_staff (nom_staff, apellido_staff, rol_staff) VALUES
 ('Mitsuo', 'Iwata', 2),      -- Voz de Tetsuo en "Akira"
 ('Nozomu', 'Sasaki', 2),     -- Voz de Kaneda en "Akira"
 ('Kotaro', 'Daigo', 2),      -- Voz de Hodaka en "El tiempo contigo"
-('Nana', 'Mori', 2);         -- Voz de Hina en "El tiempo contigo"
+('Nana', 'Mori', 2),         -- Voz de Hina en "El tiempo contigo"
 ('Kaito', 'Ishikawa', 2),  -- Voz adicional en "Your Name"
 ('Akari', 'Kitou', 2),     -- Voz adicional en "El viaje de Chihiro"
 ('Hiroshi', 'Kamiya', 2),  -- Voz adicional en "Attack on Titan: Chronicle"
@@ -123,61 +123,76 @@ INSERT INTO tbl_staff (nom_staff, apellido_staff, rol_staff) VALUES
 -- Relación entre staff y películas
 INSERT INTO staff_peli (id_staff, id_pelicula) VALUES
 -- Your Name (Película 1)
+(1, 1),
 (12, 1),  -- Ryunosuke Kamiki (Taki)
 (13, 1),  -- Mone Kamishiraishi (Mitsuha)
 
 -- El viaje de Chihiro (Película 2)
+(2, 2),
 (14, 2),  -- Rumi Hiiragi (Chihiro)
 (15, 2),  -- Miyu Irino (Haku)
 
 -- Attack on Titan: Chronicle (Película 3)
+(3, 3),
 (16, 3),  -- Yuki Kaji (Eren Yeager)
 (17, 3),  -- Marina Inoue (Armin Arlert)
 
 -- Mi vecino Totoro (Película 4)
+(2, 4),
 (18, 4),  -- Chika Sakamoto (Totoro)
 (19, 4),  -- Noriko Hidaka (Satsuki)
 
 -- Demon Slayer: Mugen Train (Película 5)
+(4, 5),
 (20, 5),  -- Hana Sugisaki (Tanjiro)
 (21, 5),  -- Natsuki Hanae (Nezuko)
 
 -- La tumba de las luciérnagas (Película 6)
+(5, 6),
 (22, 6),  -- Ayano Shiraishi (Setsuko)
 (23, 6),  -- Tsutomu Tatsumi (Seita)
 
 -- Dragon Ball Super: Broly (Película 7)
+(6, 7),
 (24, 7),  -- Masako Nozawa (Goku)
 (25, 7),  -- Ryo Horikawa (Vegeta)
 
 -- El castillo ambulante (Película 8)
+(2, 8),
 (26, 8),  -- Jun Iida (Howl)
 (27, 8),  -- Chieko Baisho (Sophie)
 
 -- Perfect Blue (Película 9)
+(7, 9),
 (28, 9),  -- Junko Iwao (Mima)
 
 -- One Piece Film: Red (Película 10)
+(8, 10),
 (29, 10), -- Rica Matsumoto (Luffy)
 (30, 10), -- Mayumi Tanaka (Usopp)
 (31, 10), -- Yuriko Yamaguchi (Sanji)
 
 -- La princesa Mononoke (Película 11)
+(2, 11),
 (32, 11), -- Yoji Matsuda (Ashitaka)
 (33, 11), -- Yuriko Ishida (San)
 
 -- Jujutsu Kaisen 0 (Película 12)
+(9, 12),
 (34, 12), -- Megumi Ogata (Yuta)
 (35, 12), -- Kana Hanazawa (Rika)
 
 -- Ghost in the Shell (Película 13)
+(10, 13),
 (36, 13), -- Atsuko Tanaka (Motoko Kusanagi)
 
 -- Akira (Película 14)
+(11, 14),
 (37, 14), -- Mitsuo Iwata (Tetsuo)
 (38, 14), -- Nozomu Sasaki (Kaneda)
 
 -- El tiempo contigo (Película 15)
+(1, 15),
 (39, 15), -- Kotaro Daigo (Hodaka)
 (40, 15); -- Nana Mori (Hina)
 

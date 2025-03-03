@@ -86,7 +86,7 @@ try {
     <input type="text" id="filterName" placeholder="Buscar por nombre...">
     <div class="buttons">
       <button id="openFilterModal">Filtrar por Género</button>
-      <a href="./login.php?session=exit"><button>Cerrar Sesión</button></a>
+      <a href="./View/login.php?session=exit"><button>Cerrar Sesión</button></a>
       <a href="./View/register.php"><button class="register">Register</button></a>
     </div>
   </header>
