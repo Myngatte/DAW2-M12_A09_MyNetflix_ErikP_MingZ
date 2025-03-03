@@ -1,6 +1,6 @@
 <?php
-
 require_once './conexion.php';
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {

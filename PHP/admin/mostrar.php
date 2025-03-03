@@ -9,6 +9,7 @@ if ($vista === 'usuarios') {
                    tbl_users.email, tbl_roles.nom_rol 
             FROM tbl_users 
             INNER JOIN tbl_roles ON tbl_users.rol_user = tbl_roles.id_rol
+            WHERE tbl_users.estado = 'Aceptado'
             ORDER BY tbl_users.id_usr";
 } elseif ($vista === 'pelis') {
     $sql = "SELECT p.*, 

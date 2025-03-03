@@ -13,6 +13,8 @@ require '../PHP/admin/conexion.php';
 <body>
     <a href='../PHP/destroy_session.php'><button class='logout'>Cerrar Sesión</button></a>
 
+    <a href="../View/notificaciones.php">Ver solicitudes pendientes</a>
+
     <h2 id="titulo">Administración de Usuarios</h2>
     <div id="boton-crear-contenedor">
         <button class='new' id="boton-crear" onclick="abrirModal('crear-usuario')">Nuevo Usuario</button>
