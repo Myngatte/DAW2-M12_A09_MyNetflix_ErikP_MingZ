@@ -1,5 +1,5 @@
 <?php
-require_once './conexion.php';
+require_once '../conection/conexion.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,6 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_generos = $conn->prepare($sql_generos);
         $stmt_generos->bindParam(':id', $id);
         $stmt_generos->execute();
+
+        // Eliminar los likes relacionados con la película
+        $sql_likes = "DELETE FROM tbl_likes WHERE peli_liked = :id";
+        $stmt_likes = $conn->prepare($sql_likes);
+        $stmt_likes->bindParam(':id', $id);
+        $stmt_likes->execute();
 
         // Luego eliminar la película
         $sql = "DELETE FROM tbl_pelis WHERE id_peli = :id";

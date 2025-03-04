@@ -1,5 +1,5 @@
 <?php
-require_once './conexion.php';
+require_once '../conection/conexion.php';
 
 $vista = isset($_GET['vista']) ? $_GET['vista'] : '';
 

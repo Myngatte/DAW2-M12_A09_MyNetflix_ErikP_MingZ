@@ -1,5 +1,5 @@
 <?php
-require_once './conexion.php';
+require_once '../conection/conexion.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

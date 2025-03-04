@@ -14,7 +14,7 @@ $password = htmlspecialchars($_POST['password']);
 
 try {
     // Busca el usuario en la base de datos
-    $stmt = $conn->prepare("SELECT id_usr, username, email, contrasena, estado FROM tbl_users WHERE username = :user OR email = :user LIMIT 1");
+    $stmt = $conn->prepare("SELECT id_usr, username, email, contrasena, estado, rol_user FROM tbl_users WHERE username = :user OR email = :user LIMIT 1");
     $stmt->bindParam(':user', $usernameOrEmail, PDO::PARAM_STR);
     $stmt->execute();
     
@@ -33,8 +33,9 @@ try {
             } else {
                 $_SESSION["activeUser"] = $result["id_usr"];
                 echo json_encode([
-                'existe' => true,
-                'valid' => true
+                    'existe' => true,
+                    'valid' => true,
+                    'rol' => $result['rol_user']
                 ]);
             }
             

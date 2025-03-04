@@ -1,5 +1,10 @@
 <?php
-require '../PHP/admin/conexion.php';
+require_once "../PHP/conection/conexion.php"; 
+
+if(!isset($_SESSION["activeUser"])){
+    header("Location: ./login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,17 +22,7 @@ require '../PHP/admin/conexion.php';
     <h2>Solicitudes Pendientes</h2>
 
     <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Género</th>
-                <th>Fecha de Nacimiento</th>
-                <th>Acciones</th>
-            </tr>
+        <thead id="tabla-encabezado">
         </thead>
         <tbody id="tabla-solicitudes">
         </tbody>

@@ -1,5 +1,10 @@
 <?php
-require '../PHP/admin/conexion.php';
+require '../PHP/conection/conexion.php';
+
+if(!isset($_SESSION["activeUser"])){
+    header("Location: ./login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,11 +14,12 @@ require '../PHP/admin/conexion.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración</title>
     <link rel="stylesheet" href="../CSS/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <a href='../PHP/destroy_session.php'><button class='logout'>Cerrar Sesión</button></a>
 
-    <a href="../View/notificaciones.php">Ver solicitudes pendientes</a>
+    <a href="../View/notificaciones.php"><i class="fa-solid fa-bell"></i></a>
 
     <h2 id="titulo">Administración de Usuarios</h2>
     <div id="boton-crear-contenedor">
@@ -23,6 +29,10 @@ require '../PHP/admin/conexion.php';
     <div class="botones">
         <button onclick="cargarDatos('usuarios')">Usuarios</button>
         <button onclick="cargarDatos('pelis')">Películas</button>
+    </div>
+
+    <div id="search-container" style="display: none;">
+        <input type="text" id="search-peli" placeholder="Buscar película por nombre..." class="search-input">
     </div>
 
     <table>
@@ -202,6 +212,28 @@ require '../PHP/admin/conexion.php';
                 <button type="submit">Eliminar</button>
                 <button type="button" onclick="cerrarModal('eliminar-peli')">Cancelar</button>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal para filtrar por géneros -->
+    <div id="modal-filtro-generos" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar" onclick="cerrarModal('filtro-generos')">&times;</span>
+            <h2>Filtrar por Géneros</h2>
+            <div id="generos-filtro" class="generos-container">
+                <?php
+                $sql = "SELECT id_genero, nom_genero FROM tbl_pgeneros";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                while ($row = $stmt->fetch()) {
+                    echo "<div class='genero-checkbox'>";
+                    echo "<input type='checkbox' id='filtro-genero-" . $row['id_genero'] . "' name='filtro-generos[]' value='" . $row['id_genero'] . "'>";
+                    echo "<label for='filtro-genero-" . $row['id_genero'] . "'>" . $row['nom_genero'] . "</label>";
+                    echo "</div>";
+                }
+                ?>
+            </div>
+            <button onclick="aplicarFiltroGeneros()" class="btn-filtrar">Aplicar Filtro</button>
         </div>
     </div>
 

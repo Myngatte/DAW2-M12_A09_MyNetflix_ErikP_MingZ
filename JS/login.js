@@ -31,8 +31,12 @@ document.getElementById('formLogin').addEventListener('submit', async function(e
                     confirmButtonText: 'Aceptar'
                 });
             } else if (result.valid) {
-                // Redirige al usuario si las credenciales son válidas
-                window.location.href = "../main.php";
+                // Redirige al usuario según su rol
+                if (result.rol === 1) {
+                    window.location.href = "../View/admin.php";
+                } else {
+                    window.location.href = "../main.php";
+                }
             } else {
                 // Muestra un mensaje de error si las credenciales son incorrectas
                 loginError.textContent = 'Las credenciales son incorrectas.';

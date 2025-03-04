@@ -77,7 +77,7 @@ try {
 <header>
     <div class="logo">🎬 MEIGA</div>    
     <div class="buttons">
-        <a href="./login.php?session=exit"><button>Cerrar Sesión</button></a>
+        <a href="../PHP/destroy_session.php"><button>Cerrar Sesión</button></a>
         <a href="./register.php"><button class="register">Register</button></a>
     </div>
 </header>

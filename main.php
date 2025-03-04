@@ -7,6 +7,13 @@ if(!isset($_SESSION["activeUser"])){
     exit();
 }
 
+// Consulta para obtener el username del usuario activo
+$sqlUser = "SELECT username FROM tbl_users WHERE id_usr = :id";
+$stmtUser = $conn->prepare($sqlUser);
+$stmtUser->bindParam(':id', $_SESSION["activeUser"]);
+$stmtUser->execute();
+$user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
 // Consulta para obtener todas las películas (usada en la vista general)
 try {
     $sql = "SELECT p.id_peli, p.nom_peli, p.portada, 
@@ -81,20 +88,22 @@ try {
 </head>
 <body>
   <header>
-    <div class="logo">🎬 MEIGA</div>
+    <div class="logo">
+      <img src="./IMG/Web/logo.png" alt="MEIGA Logo">
+    </div>
     <!-- Filtro por nombre (fuera del modal) -->
     <input type="text" id="filterName" placeholder="Buscar por nombre...">
     <div class="buttons">
       <button id="openFilterModal">Filtrar por Género</button>
-      <a href="./View/login.php?session=exit"><button>Cerrar Sesión</button></a>
-      <a href="./View/register.php"><button class="register">Register</button></a>
+      <a href="./PHP/destroy_session.php"><button>Cerrar Sesión</button></a>
+      <span class="username"><?php echo htmlspecialchars($user['username']); ?></span>
     </div>
   </header>
 
-  <h2>Películas Disponibles</h2>
 <!-- Sección Top Movies: siempre visible -->
   <div class="movies">
     <div class="genre-section">
+    <h2>Películas Disponibles</h2>
       <h3>The BIG 5</h3>
       <div class="movies-row">
         <?php foreach ($topMovies as $movie): ?>

@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const movieDiv = document.createElement('div');
           movieDiv.classList.add('movie');
           movieDiv.innerHTML = `
-            <a href="movie.php?id=${movie.id_peli}">
+            <a href="./view/movie.php?id=${movie.id_peli}">
               <img src="./IMG/Pelis/${movie.portada}" alt="${movie.nom_peli}">
               <p>${movie.nom_peli}</p>
               <span class="likes-tooltip">Likes: ${movie.likes}</span>

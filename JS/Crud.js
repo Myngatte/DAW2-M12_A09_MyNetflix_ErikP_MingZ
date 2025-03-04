@@ -10,6 +10,13 @@ function cargarDatos(vista) {
                 alert(data.error);
                 return;
             }
+            // Mostrar/ocultar barra de búsqueda según la vista
+            const searchContainer = document.getElementById('search-container');
+            searchContainer.style.display = vista === 'pelis' ? 'block' : 'none';
+            
+            // Guardar los datos originales para la búsqueda
+            window.originalData = data;
+            
             actualizarTabla(vista, data);
         })
         .catch(error => console.error("Error al obtener datos:", error));
@@ -67,7 +74,11 @@ function actualizarTabla(vista, data) {
         // Pelis
     } else if (vista === "pelis") {
         titulo.textContent = "Administración de Películas";
-        botonCrearContenedor.innerHTML = `<button class='new' onclick="abrirModal('crear-peli')">Nueva Película</button>`;
+        botonCrearContenedor.innerHTML = `
+            <button class='new' onclick="abrirModal('crear-peli')">Nueva Película</button>
+            <button class='new' onclick="abrirModal('filtro-generos')" style="margin-left: 10px;">Filtrar por Géneros</button>
+        `;
+        
         tablaHeader.innerHTML = `
             <tr>
                 <th>ID</th>
@@ -352,6 +363,36 @@ function cargarDatosEliminarPeli(id) {
         })
         .catch(error => console.error('Error al eliminar película:', error));
     }
+}
+
+// Agregar evento de búsqueda dinámica
+document.getElementById('search-peli').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredData = window.originalData.filter(peli => 
+        peli.nom_peli.toLowerCase().includes(searchTerm)
+    );
+    actualizarTabla('pelis', filteredData);
+});
+
+// Función para aplicar filtro de géneros
+function aplicarFiltroGeneros() {
+    const generosSeleccionados = Array.from(document.querySelectorAll('input[name="filtro-generos[]"]:checked'))
+        .map(checkbox => checkbox.value);
+
+    if (generosSeleccionados.length === 0) {
+        actualizarTabla('pelis', window.originalData);
+        cerrarModal('filtro-generos');
+        return;
+    }
+
+    const filteredData = window.originalData.filter(peli => {
+        if (!peli.ids_generos) return false;
+        const generosPeli = peli.ids_generos.split(',');
+        return generosSeleccionados.every(genero => generosPeli.includes(genero));
+    });
+
+    actualizarTabla('pelis', filteredData);
+    cerrarModal('filtro-generos');
 }
 
 // FETCH
